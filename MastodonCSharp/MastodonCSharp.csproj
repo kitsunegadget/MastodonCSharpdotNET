@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Instance.cs" />
+    <Compile Include="Mastodon.cs" />
     <Compile Include="Mastonet\Entities\Account.cs" />
     <Compile Include="Mastonet\Entities\Application.cs" />
     <Compile Include="Mastonet\Entities\AppRegistration.cs" />
@@ -70,8 +71,7 @@
     <Compile Include="Mastonet\ServerErrorException.cs" />
     <Compile Include="Mastonet\StreamEventArgs.cs" />
     <Compile Include="Mastonet\TimelineStreaming.cs" />
-    <Compile Include="Mastodon.cs" />
-    <Compile Include="Program1.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

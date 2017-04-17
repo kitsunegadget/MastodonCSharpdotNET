@@ -57,8 +57,6 @@ namespace MastodonCSharp
         private void GetToken()
         {
             var appregist = GetClientId();
-            appregist.Instance = base_uri;
-            appregist.Scope = Scope.Read | Scope.Write | Scope.Follow;
 
             var client = new MastodonClient(appregist);
             var url = client.OAuthUrl();
@@ -85,6 +83,8 @@ namespace MastodonCSharp
         {
             var client_id = File.ReadAllText(client_cred);
             AppRegistration ap = JsonConvert.DeserializeObject<AppRegistration>(client_id);
+            ap.Instance = base_uri;
+            ap.Scope = Scope.Read | Scope.Write | Scope.Follow;
 
             return ap;
         }

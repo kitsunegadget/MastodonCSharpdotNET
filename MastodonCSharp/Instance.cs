@@ -21,7 +21,6 @@ namespace MastodonCSharp
         public Instance(string base_uri) : base(base_uri)
         {
             client_id = base.GetClientId();
-            client_id.Instance = base_uri;
             user_id = base.GetUserId();
             client = new MastodonClient(client_id, user_id.AccessToken);
         }

@@ -1,4 +1,4 @@
 # MastodonのクライアントをC#.NETで
 
-Using library by [Mastonet](https://github.com/glacasa/Mastonet)
+Using library by [Masto.NET](https://github.com/glacasa/Mastonet)
 

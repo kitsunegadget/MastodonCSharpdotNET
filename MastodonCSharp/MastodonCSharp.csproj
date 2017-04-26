@@ -8,11 +8,12 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>MastodonCSharp</RootNamespace>
     <AssemblyName>MastodonCSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,11 +35,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Mastonet, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mastonet.0.1.0-beta1\lib\netstandard1.1\Mastonet.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,37 +59,12 @@
   <ItemGroup>
     <Compile Include="Instance.cs" />
     <Compile Include="Mastodon.cs" />
-    <Compile Include="Mastonet\Entities\Account.cs" />
-    <Compile Include="Mastonet\Entities\Application.cs" />
-    <Compile Include="Mastonet\Entities\AppRegistration.cs" />
-    <Compile Include="Mastonet\Entities\Attachment.cs" />
-    <Compile Include="Mastonet\Entities\Auth.cs" />
-    <Compile Include="Mastonet\Entities\Card.cs" />
-    <Compile Include="Mastonet\Entities\Context.cs" />
-    <Compile Include="Mastonet\Entities\Error.cs" />
-    <Compile Include="Mastonet\Entities\Instance.cs" />
-    <Compile Include="Mastonet\Entities\Mention.cs" />
-    <Compile Include="Mastonet\Entities\Notification.cs" />
-    <Compile Include="Mastonet\Entities\Relationship.cs" />
-    <Compile Include="Mastonet\Entities\Report.cs" />
-    <Compile Include="Mastonet\Entities\Results.cs" />
-    <Compile Include="Mastonet\Entities\Status.cs" />
-    <Compile Include="Mastonet\Entities\Tag.cs" />
-    <Compile Include="Mastonet\Enums\Scope.cs" />
-    <Compile Include="Mastonet\Enums\Visibility.cs" />
-    <Compile Include="Mastonet\MastodonClient.cs" />
-    <Compile Include="Mastonet\ServerErrorException.cs" />
-    <Compile Include="Mastonet\StreamEventArgs.cs" />
-    <Compile Include="Mastonet\TimelineStreaming.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Mastonet\Mastonet.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

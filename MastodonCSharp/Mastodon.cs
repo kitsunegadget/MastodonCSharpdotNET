@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Http;
 using System.Net;
-using System.Net.Security;
 using Newtonsoft.Json;
 using Mastonet;
 using Mastonet.Entities;
@@ -26,27 +24,31 @@ namespace MastodonCSharp
             client_cred = base_uri + "_client_cred.txt";
             user_cred = base_uri + "_user_cred.txt";
 
+            var authClient = new AuthenticationClient(base_uri);
+
             if (!File.Exists(client_cred))
             {
                 //クライアント登録 1度のみでおｋ。
-                RegistApp(base_uri).Wait();
+                RegistApp(authClient).Wait();
                 Console.WriteLine("App Regist ok.");
-                //Console.ReadKey();
+                Console.ReadKey();
+                Console.WriteLine();
             }
 
             if (!File.Exists(user_cred))
             {
-                GetToken(); //トークン取得
+                GetToken(authClient).Wait(); //トークン取得
                 Console.WriteLine("Token ok.");
-                //Console.ReadKey();
+                Console.ReadKey();
+                Console.WriteLine();
             }
         }
 
         //app登録
-        private async Task RegistApp(string base_uri)
+        private async Task RegistApp(AuthenticationClient authClient)
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            var appRegistration = await MastodonClient.CreateApp(base_uri, "Foxydon C#", Scope.Read | Scope.Write | Scope.Follow, "https://twitter.com/yuzsr_", "urn:ietf:wg:oauth:2.0:oob");
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; 
+            var appRegistration = await authClient.CreateApp("Foxydon C#", Scope.Read | Scope.Write | Scope.Follow, "https://twitter.com/yuzsr_", "urn:ietf:wg:oauth:2.0:oob");
             
             var json = JsonConvert.SerializeObject(appRegistration);
             string filename = client_cred;
@@ -54,25 +56,19 @@ namespace MastodonCSharp
         }
 
         //トークン取得
-        private void GetToken()
+        private async Task GetToken(AuthenticationClient authClient)
         {
             var appregist = GetClientId();
+            authClient.AppRegistration = appregist;
 
-            var client = new MastodonClient(appregist);
-            var url = client.OAuthUrl();
+            var url = authClient.OAuthUrl();
             System.Diagnostics.Process.Start(url);
 
             Console.WriteLine("Enter Athorization CODE.");
             string code = Console.ReadLine();
 
-            GetTokenSync(appregist, code).Wait();
-        }
-        //なぜ分けた…
-        private async Task GetTokenSync(AppRegistration appregist, string code)
-        {
-            var client = new MastodonClient(appregist);
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            var auth = await client.ConnectWithCode(code);
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; 
+            var auth = await authClient.ConnectWithCode(code);
 
             var json = JsonConvert.SerializeObject(auth);
             string filename = user_cred;
